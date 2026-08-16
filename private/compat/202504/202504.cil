@@ -2545,7 +2545,6 @@
 (typeattributeset sysfs_net_202504 (sysfs_net))
 (typeattributeset sysfs_nfc_power_writable_202504 (sysfs_nfc_power_writable))
 (typeattributeset sysfs_power_202504 (sysfs_power))
-(typeattributeset sysfs_202504 (sysfs sysfs_powercap))
 (typeattributeset sysfs_rtc_202504 (sysfs_rtc))
 (typeattributeset sysfs_suspend_stats_202504 (sysfs_suspend_stats))
 (typeattributeset sysfs_switch_202504 (sysfs_switch))

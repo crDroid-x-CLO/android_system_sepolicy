@@ -642,10 +642,6 @@ type tee_service_contexts_file, system_file_type, file_type;
 # virtualizationmanager, which runs at a more constrained MLS level.
 type virtualizationservice_data_file, file_type, data_file_type, core_data_file_type, mlstrustedobject;
 
-starting_at_board_api(202604, `
-    type sysfs_powercap, fs_type, sysfs_type;
-')
-
 # /sys/bus/thunderbolt
 type sysfs_thunderbolt, fs_type, sysfs_type;
 # /sys/class/typec
