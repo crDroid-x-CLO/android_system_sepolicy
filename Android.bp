@@ -680,6 +680,7 @@ se_policy_binary {
     name: "precompiled_sepolicy_without_vendor",
     srcs: [":precompiled_sepolicy_without_vendor_srcs"],
     installable: false, // used only for Treble labeling tests
+    permissive_domains_on_user_builds: ["backuptool", "su"],
 }
 
 filegroup {
@@ -714,6 +715,10 @@ precompiled_se_policy_binary {
     required: [
         "sepolicy_neverallows",
     ],
+    permissive_domains_on_user_builds: [
+        "backuptool",
+        "su",
+    ],
 }
 
 // policy for recovery
@@ -741,11 +746,27 @@ se_policy_cil {
     recovery: true,
 }
 
+filegroup {
+    name: "recovery_sepolicy_genfs_srcs",
+    device_first_srcs: select(soong_config_variable("ANDROID", "BOARD_GENFS_LABELS_VERSION"), {
+        any @ ver: [":plat_sepolicy_genfs_" + ver + ".cil"],
+        default: [],
+    }),
+}
+
 se_policy_binary {
     name: "sepolicy.recovery",
-    srcs: [":recovery_sepolicy.cil"],
+    srcs: [
+        ":recovery_sepolicy.cil",
+        ":recovery_sepolicy_genfs_srcs",
+    ],
     stem: "sepolicy",
     recovery: true,
+    permissive_domains_on_user_builds: [
+        "backuptool",
+        "recovery",
+        "su",
+    ],
 }
 
 //////////////////////////////////
@@ -800,6 +821,7 @@ se_policy_binary {
     dist: {
         targets: ["sepolicy_finalize"],
     },
+    permissive_domains_on_user_builds: ["su"],
 }
 
 se_policy_conf {
